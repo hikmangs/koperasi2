@@ -3,7 +3,7 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     versionCode = "1"
     >
-    <name>App Koperasi</name>
+    <name>Sikop Ritmis</name>
     <description>
         Aplikasi Pendaftaran Koperasi Kabupaten Bogor.
     </description>
