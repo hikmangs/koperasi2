@@ -47,3 +47,65 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+app.initialize();
+
+
+
+document.getElementById("openBrowser").addEventListener("click", openBrowser);
+
+document.addEventListener("offline", onOffline, false);
+
+function onOffline() {
+    // alert('onOffline');
+    testShareSheet();
+}
+
+function openBrowser() {
+   var url = 'http://sikopritmis.bogorkab.go.id/';
+   var target = '_blank';
+   var options = "location=no,toolbar=no"
+   var ref = cordova.InAppBrowser.open(url, target, options);
+
+   ref.addEventListener('loadstart', loadstartCallback);
+   ref.addEventListener('loadstop', loadstopCallback);
+   ref.addEventListener('loadloaderror', loaderrorCallback);
+   ref.addEventListener('exit', exitCallback);
+
+   function loadstartCallback(event) {
+     window.plugins.spinnerDialog.show();
+   }
+
+   function loadstopCallback(event) {
+      window.plugins.spinnerDialog.hide();
+   }
+
+   function loaderrorCallback(error) {
+      testShareSheet();
+   }
+
+   function exitCallback() {
+      console.log('Browser is closed...')
+   }
+}
+
+
+var callback = function(buttonIndex) {
+    setTimeout(function() {
+      document.getElementById('openBrowser').click();
+    });
+  };
+  function testShareSheet() {
+    var options = {
+      androidTheme : window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT, // material
+      title: 'Network error! Please check your Internet connection',
+      buttonLabels: ['Reload'],
+      addCancelButtonWithLabel: 'Cancel',
+      androidEnableCancelButton : true,
+      winphoneEnableCancelButton : true,
+      iosEnableCancelButton : true,
+      destructiveButtonLast: true // you can choose where the destructive button is shown
+    };
+    window.plugins.actionsheet.show(options, callback);
+  }
+
