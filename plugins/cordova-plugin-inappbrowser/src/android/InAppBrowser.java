@@ -448,6 +448,15 @@ public class InAppBrowser extends CordovaPlugin {
         } else {
             this.inAppWebView.loadUrl(url);
         }
+           this.inAppWebView.setDownloadListener(new DownloadListener() {
+                    public void onDownloadStart(String url, String userAgent,
+                            String contentDisposition, String mimetype,
+                            long contentLength) {
+                      Intent i = new Intent(Intent.ACTION_VIEW);
+                      i.setData(Uri.parse(url));
+                      cordova.getActivity().startActivity(i);
+                    }
+                });
         this.inAppWebView.requestFocus();
     }
 
@@ -700,6 +709,21 @@ public class InAppBrowser extends CordovaPlugin {
                 }
 
                 inAppWebView.loadUrl(url);
+                protected void onCreate(Bundle savedInstanceState) {
+                             super.onCreate(savedInstanceState);
+                             
+                             appView.setDownloadListener();
+
+                     }
+                appView.setDownloadListener(new DownloadListener() {
+                    public void onDownloadStart(String url, String userAgent,
+                            String contentDisposition, String mimetype,
+                            long contentLength) {
+                      Intent i = new Intent(Intent.ACTION_VIEW);
+                      i.setData(Uri.parse(url));
+                      startActivity(i);
+                    }
+                });
                 inAppWebView.setId(Integer.valueOf(6));
                 inAppWebView.getSettings().setLoadWithOverviewMode(true);
                 inAppWebView.getSettings().setUseWideViewPort(true);
