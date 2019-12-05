@@ -55,15 +55,15 @@
         <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
 
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+    <access origin="*" launch-external="yes" subdomains="true"/>
+    <access origin="http://*" launch-external="yes" />
+    <access origin="https://*" launch-external="yes" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
+    <allow origin href="tel:*" launch-external="yes" />
+    <allow origin href="sms:*" launch-external="yes" />
+    <allow origin href="mailto:*" launch-external="yes" />
+    <allow origin href="geo:*" launch-external="yes" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
